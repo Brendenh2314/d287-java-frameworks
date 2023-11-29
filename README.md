@@ -1,10 +1,11 @@
 # WESTERN GOVERNOR UNIVERSITY 
 ## D287 – JAVA FRAMEWORKS
 C.  Customize the HTML user interface for your customer’s application. The user interface should include the shop name, the product names, and the names of the parts.
-
-
-Note: Do not remove any elements that were included in the screen. You may add any additional elements you would like or any images, colors, and styles, although it is not required.
-
+    Edits I made to mainscreen.html:
+    Line 14: Changed the head title to "B's Skate Shop"
+        Line 19: Changed h1 tag to "B's Skate Shop"
+        Line 21: Changed h2 "Parts" to "Skateboard Parts"
+        Line 53: Changed "Products" to "Skateboard Products"
 
 D.  Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen.
 
