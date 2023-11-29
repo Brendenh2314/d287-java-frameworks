@@ -16,7 +16,10 @@
 <body>
 
 <div class="container">
-    <h1>B's Skate Shop</h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>B's Skate Shop</h1>
+        <a th:href="@{/about}" class="btn btn-primary btn-sm mb-3">About My Skate Shop</a>
+    </div>
     <hr>
     <h2>Skateboard Parts</h2>
     <form th:action="@{/mainscreen}">
@@ -86,6 +89,7 @@
         </tr>
         </tbody>
     </table>
+    <br>
 </div>
 </body>
 </html>
