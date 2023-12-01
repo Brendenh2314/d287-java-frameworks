@@ -2,7 +2,7 @@
 ## D287 – JAVA FRAMEWORKS
 C.  Customize the HTML user interface for your customer’s application. The user interface should include the shop name, the product names, and the names of the parts.
     
-    Edits I made to mainscreen.html:
+    Changes I made to mainscreen.html:
         Line 14: Changed the head title to "B's Skate Shop"
         Line 19: Changed h1 tag to "B's Skate Shop"
         Line 21: Changed h2 "Parts" to "Skateboard Parts"
@@ -19,18 +19,26 @@ D.  Add an “About” page to the application to describe your chosen customer�
         line 35: Created a buttom named 'Back to Main Screen'
         
     
-    Edits to mainscreen.html:
+    Changes to mainscreen.html:
         Line 19-22: created a new div that encased my h1 as well as create a buttom called 'About My Skate Shop'. This allowed the button and heading to be on the top of the page
     
 
     Created aboutController.java
-    Edits to aboutController.java:
+    Changes to aboutController.java:
         Lines 1-12: Added proper code to allow spring to register the about page
 
 E.  Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.
 
-
-Note: Make sure the sample inventory is added only when both the part and product lists are empty. When adding the sample inventory appropriate for the store, the inventory is stored in a set so duplicate items cannot be added to your products. When duplicate items are added, make a “multi-pack” part.
+    Changes to OutsourcedPart class:
+        Lines 16-17: Added private fields minimum and maximum.
+        Lines 29-43: Added getter and setter methods for minimum and maximum.
+    Changes to BootStrapData.java:
+        Lines 27-29: Added 3 constructors.
+        In the original got rid of the commented sections.
+        Lines 37-38: Added my two variables.
+        Lines 40-46 added an if else statement that added to SkateShopInventory() or printed that the inventory is full.
+        Lines48-49: Added a print statement saying it was completed.
+        The rest of the code besides the original print statments at 79-83 were part and product additions.
 
 
 F.  Add a “Buy Now” button to your product list. Your “Buy Now” button must meet each of the following parameters:
