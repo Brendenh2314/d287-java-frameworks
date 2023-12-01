@@ -3,24 +3,24 @@
 C.  Customize the HTML user interface for your customer’s application. The user interface should include the shop name, the product names, and the names of the parts.
     
     Changes I made to mainscreen.html:
-        Line 14: Changed the head title to "B's Skate Shop"
-        Line 19: Changed h1 tag to "B's Skate Shop"
-        Line 21: Changed h2 "Parts" to "Skateboard Parts"
+        Line 14: Changed the head title to "B's Skate Shop".
+        Line 19: Changed h1 tag to "B's Skate Shop".
+        Line 21: Changed h2 "Parts" to "Skateboard Parts".
         Line 53: Changed "Products" to "Skateboard Products"
 
 D.  Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen.
     
     Created about.html
     about.html changes:
-        Kept format from the main html
-        Lines 1-38: Created the about.html page with the original formatting as well as my own about statement for my shop
-        Line 14: Changed head title to About Skate Shop from the default
-        line 18-33: Added the about statement
-        line 35: Created a buttom named 'Back to Main Screen'
+        Kept format from the main html.
+        Lines 1-38: Created the about.html page with the original formatting as well as my own about statement for my shop.
+        Line 14: Changed head title to About Skate Shop from the default.
+        line 18-33: Added the about statement.
+        line 35: Created a buttom named 'Back to Main Screen'.
         
     
     Changes to mainscreen.html:
-        Line 19-22: created a new div that encased my h1 as well as create a buttom called 'About My Skate Shop'. This allowed the button and heading to be on the top of the page
+        Line 19-22: created a new div that encased my h1 as well as create a buttom called 'About My Skate Shop'. This allowed the button and heading to be on the top of the page.
     
 
     Created aboutController.java
@@ -45,7 +45,21 @@ F.  Add a “Buy Now” button to your product list. Your “Buy Now” button m
 •  The “Buy Now” button must be next to the buttons that update and delete products.
 •  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.
 •  Display a message that indicates the success or failure of a purchase.
-
+    
+    Changes to AddProductController.java:
+        Lines 19: add import for Optional.
+        Lines 35-36:add ProductService class.
+        Lines 92-113: Add mapping for buyproduct to their accoridng webpages.
+    Create confirmationbuyproduct.html:
+        Made all proper html edits to the webpage.
+    Create purchaseerror.html:
+        Made all proper html edits to the webpage.
+    Changes to mainscreen.html:
+        lines 89-93: added the buttons and their mappings to the table inside mainscreen.
+    Changes to Product.java:
+        Lines 19-30: made classes private.
+        Lines 91-101: made a method for purchase logic.
+    
 
 G.  Modify the parts to track maximum and minimum inventory by doing the following:
 •  Add additional fields to the part entity for maximum and minimum inventory.

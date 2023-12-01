@@ -82,9 +82,15 @@
             <td th:text="${tempProduct.name}">1</td>
             <td th:text="${tempProduct.price}">1</td>
             <td th:text="${tempProduct.inv}">1</td>
-            <td><a th:href="@{/showProductFormForUpdate(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Update</a>
+            <td>
+                <a th:href="@{/showProductFormForUpdate(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Update</a>
                 <a th:href="@{/deleteproduct(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3"
                    onclick="if(!(confirm('Are you sure you want to delete this product?')))return false">Delete</a>
+
+                <form th:action="@{/buyproduct(productID=${tempProduct.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-primary btn-sm mb-3">Buy Now</button>
+                </form>
+                <span th:if="${param.purchaseResult}" th:text="${param.purchaseResult}" class="text-success"></span>
             </td>
         </tr>
         </tbody>

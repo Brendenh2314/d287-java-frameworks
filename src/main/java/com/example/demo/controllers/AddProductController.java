@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 /**
  *
  *
@@ -31,6 +31,9 @@ public class AddProductController {
     private List<Part> theParts;
     private static Product product1;
     private Product product;
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/showFormAddProduct")
     public String showFormAddPart(Model theModel) {
@@ -85,6 +88,26 @@ public class AddProductController {
             }
             repo.save(product);
             return "confirmationaddproduct";
+        }
+    }
+
+    @PostMapping("/buyproduct")
+    public String buyProduct(@RequestParam("productID") long productId, Model model) {
+        Optional<Product> optionalProduct = Optional.ofNullable(productService.findById((int) productId));
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+
+            if (product.buyNow()) {
+                productService.save(product);
+                model.addAttribute("purchaseResult", "Purchase successful!");
+                return "confirmationbuyproduct"; // New view for successful purchase
+            } else {
+                model.addAttribute("purchaseResult", "Purchase failed. Product out of stock.");
+                return "purchaseerror"; // New view for purchase failure
+            }
+        } else {
+            model.addAttribute("purchaseResult", "Product not found.");  // Handle the case when the product is not found
+            return "purchaseerror"; // New view for product not found
         }
     }
 
