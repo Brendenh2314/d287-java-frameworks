@@ -51,11 +51,11 @@ public class BootStrapData implements CommandLineRunner {
 
     private void addSkateShopInventory() {
         // Code to add sample inventory for a skate shop
-        OutsourcedPart skateboardDeck = createOutsourcedPart("Skateboard Deck", 50, 49.99, 10, 100, "Skate Supply Co.");
-        OutsourcedPart trucks = createOutsourcedPart("Trucks", 30, 29.99, 5, 50, "Skate Supply Co.");
-        OutsourcedPart wheels = createOutsourcedPart("Wheels", 40, 19.99, 8, 80, "Skate Supply Co.");
-        OutsourcedPart bearings = createOutsourcedPart("Bearings", 25, 9.99, 5, 40, "Skate Supply Co.");
-        OutsourcedPart gripTape = createOutsourcedPart("Grip Tape", 20, 7.99, 4, 30, "Skate Supply Co.");
+        OutsourcedPart skateboardDeck = createOutsourcedPart("Skateboard Deck", 50, 49.99, 10, 100, "Skate Supply Co.", 5, 25);
+        OutsourcedPart trucks = createOutsourcedPart("Trucks", 30, 29.99, 5, 50, "Skate Supply Co.", 5, 30);
+        OutsourcedPart wheels = createOutsourcedPart("Wheels", 40, 19.99, 8, 80, "Skate Supply Co.", 4, 35);
+        OutsourcedPart bearings = createOutsourcedPart("Bearings", 25, 9.99, 5, 40, "Skate Supply Co.", 3, 30);
+        OutsourcedPart gripTape = createOutsourcedPart("Grip Tape", 20, 7.99, 4, 30, "Skate Supply Co.", 2, 20);
 
         outsourcedPartRepository.save(skateboardDeck);
         outsourcedPartRepository.save(trucks);
@@ -77,13 +77,13 @@ public class BootStrapData implements CommandLineRunner {
 
         // Print statements moved within the method
         System.out.println("Started in Bootstrap");
-        System.out.println("Number of Products"+productRepository.count());
+        System.out.println("Number of Products" + productRepository.count());
         System.out.println(productRepository.findAll());
-        System.out.println("Number of Parts"+partRepository.count());
+        System.out.println("Number of Parts" + partRepository.count());
         System.out.println(partRepository.findAll());
     }
 
-    private OutsourcedPart createOutsourcedPart(String name, int inv, double price, int min, int max, String companyName) {
+    private OutsourcedPart createOutsourcedPart(String name, int inv, double price, int min, int max, String companyName, int minInv, int maxInv) {
         OutsourcedPart part = new OutsourcedPart();
         part.setName(name);
         part.setInv(inv);
@@ -91,6 +91,8 @@ public class BootStrapData implements CommandLineRunner {
         part.setMinimum(min);
         part.setMaximum(max);
         part.setCompanyName(companyName);
+        part.setMinInv(minInv);
+        part.setMaxInv(maxInv);
         return part;
     }
 

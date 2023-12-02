@@ -8,39 +8,44 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- *
- *
- *
- */
 @Entity
 @ValidDeletePart
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name="part_type", discriminatorType = DiscriminatorType.INTEGER)
 @Table(name="Parts")
 public abstract class Part implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    String name;
+    private long id;
+
+    private String name;
+
     @Min(value = 0, message = "Price value must be positive")
-    double price;
+    private double price;
+
     @Min(value = 0, message = "Inventory value must be positive")
-    int inv;
+    private int inv;
+
+    @Min(value = 0, message = "Minimum inventory must be at least 0")
+    private int minInv;
+
+    @Min(value = 0, message = "Maximum inventory must be at least 0")
+    private int maxInv;
 
     @ManyToMany
     @JoinTable(name="product_part", joinColumns = @JoinColumn(name="part_id"),
             inverseJoinColumns=@JoinColumn(name="product_id"))
-    Set<Product> products= new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
     public Part() {
     }
 
-    public Part(String name, double price, int inv) {
+    public Part(String name, double price, int inv, int minInv, int maxInv) {
         this.name = name;
         this.price = price;
         this.inv = inv;
+        this.minInv = minInv;
+        this.maxInv = maxInv;
     }
 
     public Part(long id, String name, double price, int inv) {
@@ -90,8 +95,28 @@ public abstract class Part implements Serializable {
         this.products = products;
     }
 
+    public int getMinInv() {
+        return minInv;
+    }
+
+    public void setMinInv(int minInv) {
+        this.minInv = minInv;
+    }
+
+    public int getMaxInv() {
+        return maxInv;
+    }
+
+    public void setMaxInv(int maxInv) {
+        this.maxInv = maxInv;
+    }
+
     public String toString(){
         return this.name;
+    }
+
+    public boolean isInventoryValid() {
+        return inv >= minInv && inv <= maxInv;
     }
     @Override
     public boolean equals(Object o) {

@@ -20,7 +20,7 @@ D.  Add an “About” page to the application to describe your chosen customer�
         
     
     Changes to mainscreen.html:
-        Line 19-22: created a new div that encased my h1 as well as create a buttom called 'About My Skate Shop'. This allowed the button and heading to be on the top of the page.
+        Line 19-22: Created a new div that encased my h1 as well as create a buttom called 'About My Skate Shop'. This allowed the button and heading to be on the top of the page.
     
 
     Created aboutController.java
@@ -47,18 +47,18 @@ F.  Add a “Buy Now” button to your product list. Your “Buy Now” button m
 •  Display a message that indicates the success or failure of a purchase.
     
     Changes to AddProductController.java:
-        Lines 19: add import for Optional.
-        Lines 35-36:add ProductService class.
+        Lines 19: Add import for Optional.
+        Lines 35-36:Add ProductService class.
         Lines 92-113: Add mapping for buyproduct to their accoridng webpages.
     Create confirmationbuyproduct.html:
         Made all proper html edits to the webpage.
     Create purchaseerror.html:
         Made all proper html edits to the webpage.
     Changes to mainscreen.html:
-        lines 89-93: added the buttons and their mappings to the table inside mainscreen.
+        lines 89-93: Added the buttons and their mappings to the table inside mainscreen.
     Changes to Product.java:
-        Lines 19-30: made classes private.
-        Lines 91-101: made a method for purchase logic.
+        Lines 19-30: Made classes private.
+        Lines 91-101: Made a method for purchase logic.
     
 
 G.  Modify the parts to track maximum and minimum inventory by doing the following:
@@ -67,6 +67,21 @@ G.  Modify the parts to track maximum and minimum inventory by doing the followi
 •  Add to the InhousePartForm and OutsourcedPartForm forms additional text inputs for the inventory so the user can set the maximum and minimum values.
 •  Rename the file the persistent storage is saved to.
 •  Modify the code to enforce that the inventory is between or at the minimum and maximum value.
+
+    Changes to AddInhousePartController:
+        Lines 36-39: Add inventory range validation.
+    Changes to AddOutsourcedPartController:
+        Lines 36-39: Add inventory range validation.
+    Changes to part.java:
+        Lines 47-48: Add minInv and manInv to part.
+        Lines 101-113: Add getters and setters for new variables:
+        Lines 118-119: Add boolean for inventory.
+    Changes to InhousePartForm.html:
+        Lines 23-29: Add text inputs for minInv and maxInv.
+    Changes to OuthousePartForm.html:
+        Lines 24-28: Add text inputs for minInv and maxInv.
+    Changes to application.properties:
+        Lines 6: change database url.
 
 
 H.  Add validation for between or at the maximum and minimum fields. The validation must include the following:
