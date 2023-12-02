@@ -1,9 +1,9 @@
 package com.example.demo.controllers;
 
 import com.example.demo.domain.OutsourcedPart;
-import com.example.demo.domain.Part;
 import com.example.demo.service.OutsourcedPartService;
 import com.example.demo.service.OutsourcedPartServiceImpl;
+import com.example.demo.validators.EnufPartsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -21,24 +21,26 @@ public class AddOutsourcedPartController {
     @Autowired
     private ApplicationContext context;
 
+    @Autowired
+    private EnufPartsValidator enufPartsValidator;
+
     @GetMapping("/showFormAddOutPart")
     public String showFormAddOutsourcedPart(Model theModel) {
         OutsourcedPart part = new OutsourcedPart();
-        theModel.addAttribute("outsourcedpart", part);  // Corrected line
+        theModel.addAttribute("outsourcedpart", part);
         return "OutsourcedPartForm";
     }
 
     @PostMapping("/showFormAddOutPart")
     public String submitForm(@Valid @ModelAttribute("outsourcedpart") OutsourcedPart part,
-                             BindingResult bindingResult, Model theModel) {
+                             BindingResult theBindingResult, Model theModel) {
         theModel.addAttribute("outsourcedpart", part);
 
-        if (!part.isInventoryValid()) {
-            bindingResult.rejectValue("inv", "inventory.invalid", "Inventory must be within the specified range.");
+        if (!enufPartsValidator.isValid(part, theBindingResult)) {
             return "OutsourcedPartForm";
         }
 
-        if (bindingResult.hasErrors()) {
+        if (theBindingResult.hasErrors()) {
             return "OutsourcedPartForm";
         } else {
             OutsourcedPartService repo = context.getBean(OutsourcedPartServiceImpl.class);

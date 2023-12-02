@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.domain.InhousePart;
 import com.example.demo.service.InhousePartService;
 import com.example.demo.service.InhousePartServiceImpl;
+import com.example.demo.validators.EnufPartsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class AddInhousePartController {
     @Autowired
     private ApplicationContext context;
 
+    @Autowired
+    private EnufPartsValidator enufPartsValidator;
+
     @GetMapping("/showFormAddInPart")
     public String showFormAddInhousePart(Model theModel) {
         InhousePart inhousepart = new InhousePart();
@@ -32,8 +36,8 @@ public class AddInhousePartController {
                              BindingResult theBindingResult, Model theModel) {
         theModel.addAttribute("inhousepart", part);
 
-        if (!part.isInventoryValid()) {
-            theBindingResult.rejectValue("inv", "inventory.invalid", "Inventory must be within the specified range.");
+
+        if (!enufPartsValidator.isValid(part, theBindingResult)) {
             return "InhousePartForm";
         }
 
