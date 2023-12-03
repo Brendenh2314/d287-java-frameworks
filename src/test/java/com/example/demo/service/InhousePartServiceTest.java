@@ -2,14 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.domain.InhousePart;
 import com.example.demo.repositories.InhousePartRepository;
-import com.example.demo.repositories.PartRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

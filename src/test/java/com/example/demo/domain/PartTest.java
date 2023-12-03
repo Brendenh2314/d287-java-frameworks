@@ -139,21 +139,21 @@ class PartTest {
 
     @Test
     void testEquals() {
-        partIn.setId(1l);
+        partIn.setId(1L);
         Part newPartIn=new InhousePart();
-        newPartIn.setId(1l);
+        newPartIn.setId(1L);
         assertEquals(partIn,newPartIn);
-        partOut.setId(1l);
+        partOut.setId(1L);
         Part newPartOut=new OutsourcedPart();
-        newPartOut.setId(1l);
+        newPartOut.setId(1L);
         assertEquals(partOut,newPartOut);
 
     }
 
     @Test
     void testHashCode() {
-        partIn.setId(1l);
-        partOut.setId(1l);
+        partIn.setId(1L);
+        partOut.setId(1L);
         assertEquals(partIn.hashCode(),partOut.hashCode());
     }
 
