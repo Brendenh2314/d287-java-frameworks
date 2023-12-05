@@ -78,7 +78,7 @@ G.  Modify the parts to track maximum and minimum inventory by doing the followi
         Lines 118-119: Add boolean for inventory.
     Changes to InhousePartForm.html:
         Lines 23-29: Add text inputs for minInv and maxInv.
-    Changes to OuthousePartForm.html:
+    Changes to OutsourcePartForm.html:
         Lines 24-28: Add text inputs for minInv and maxInv.
     Changes to application.properties:
         Lines 6: change database url.
@@ -92,11 +92,11 @@ H.  Add validation for between or at the maximum and minimum fields. The validat
     Changes to AddInhousePartController.java:
         Lines 24-25: Add variable.
         Lines 39-40: Validate using EnufPartsValidator.
-    Changes to AddOuthousePartController.java:
+    Changes to AddOutsourcePartController.java:
         Lines 24-25: Add variable.
         Lines 39-40: Validate using EnufPartsValidator.
     Changes to EnufPartsValidator:
-        Lines 50-70: Validate for both inhousepart and outhousepart and create a helper method.
+        Lines 50-70: Validate for both inhousepart and outsourcepart and create a helper method.
 
 I.  Add at least two unit tests for the maximum and minimum fields to the PartTest class in the test package.
 
@@ -107,3 +107,12 @@ J.  Remove the class files for any unused validators in order to clean your code
     
     Safe deleted DeletePartValidator.java.
     Ran clean code to fix any minor errors.
+
+H Reviewed:
+    
+    Changes to AddInhousePartController.java:
+        Line 39: Created edit to fix white page error.
+    Changes to AddOutsourcedPartController.java:
+        Line 40: Created edit to fix white page error.
+    Changes to OutsourcedPartForm.html
+        Lines 11-12: created a space for error messag eto be displayed.

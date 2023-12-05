@@ -37,6 +37,7 @@ public class AddOutsourcedPartController {
         theModel.addAttribute("outsourcedpart", part);
 
         if (!enufPartsValidator.isValid(part, theBindingResult)) {
+            theBindingResult.rejectValue("inv", "inventory.invalid", "Inventory Invalid, check to make sure inventory number is between the min and max inventory.");
             return "OutsourcedPartForm";
         }
 
