@@ -114,5 +114,10 @@ H Reviewed:
         Line 39: Created edit to fix white page error.
     Changes to AddOutsourcedPartController.java:
         Line 40: Created edit to fix white page error.
-    Changes to OutsourcedPartForm.html
+    Changes to OutsourcedPartForm.html:
         Lines 11-12: created a space for error messag eto be displayed.
+    Changes to AddProductController.java:
+        Lines 80-100: Corrected syntax.
+    Changes to EnufPartsValidator.java:
+        Lines 38-52: Corrected syntax.
+        Lines 58 & 63: Make small correction to the error message.

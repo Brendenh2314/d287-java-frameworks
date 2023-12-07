@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 import com.example.demo.domain.Part;
 import com.example.demo.domain.Product;
 import com.example.demo.service.PartService;
-import com.example.demo.service.PartServiceImpl;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +54,8 @@ public class AddProductController {
     }
 
     @PostMapping("/showFormAddProduct")
-    public String submitForm(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model theModel) {
+    public String submitForm(@Valid @ModelAttribute("product") Product product,
+                             BindingResult bindingResult, Model theModel) {
         theModel.addAttribute("product", product);
 
         if(bindingResult.hasErrors()){
@@ -73,26 +73,37 @@ public class AddProductController {
  //       theModel.addAttribute("assparts", assparts);
  //       this.product=product;
 //        product.getParts().addAll(assparts);
-        else {
+          else {
             ProductService repo = context.getBean(ProductServiceImpl.class);
-            if(product.getId()!=0) {
+            if (product.getId() != 0) {
                 Product product2 = repo.findById((int) product.getId());
-                PartService partService1 = context.getBean(PartServiceImpl.class);
-                if(product.getInv()- product2.getInv()>0) {
-                    for (Part p : product2.getParts()) {
-                        int inv = p.getInv();
-                        p.setInv(inv - (product.getInv() - product2.getInv()));
-                        partService1.save(p);
+
+                // Check for low part inventory when updating the product
+                for (Part p : product2.getParts()) {
+                    int remainingInventory = p.getInv() - (product.getInv() - product2.getInv());
+                    if (remainingInventory < p.getMinInv()) {
+                        // Reject the form submission and display an error message
+                        bindingResult.rejectValue("inv", "inventory.invalid",
+                                "Inventory Invalid. '" + p.getName() + "' to fall below the minimum inventory.");
+                        theModel.addAttribute("parts", partService.findAll());
+                        List<Part> availParts = new ArrayList<>();
+                        for (Part availablePart : partService.findAll()) {
+                            if (!product2.getParts().contains(availablePart)) {
+                                availParts.add(availablePart);
+                            }
+                        }
+                        theModel.addAttribute("availparts", availParts);
+                        theModel.addAttribute("assparts", product2.getParts());
+                        return "productForm";
                     }
                 }
             }
-            else{
-                product.setInv(0);
-            }
+
+            // Save or update the product
             repo.save(product);
             return "confirmationaddproduct";
         }
-    }
+        }
 
     @PostMapping("/buyproduct")
     public String buyProduct(@RequestParam("productID") long productId, Model model) {

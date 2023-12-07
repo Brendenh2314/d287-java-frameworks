@@ -35,28 +35,32 @@ public class EnufPartsValidator implements ConstraintValidator<ValidEnufParts, P
 
             for (Part p : myProduct.getParts()) {
                 // Check if adding/updating the product would cause any associated part to fall below the minimum inventory
-                if (p.getInv() + product.getInv() - myProduct.getInv() < p.getMinInv()) {
+                int newPartInventory = p.getInv() + product.getInv() - myProduct.getInv();
+                if (newPartInventory < p.getMinInv() && product.getInv() > myProduct.getInv()) {
                     addValidationError((BindingResult) constraintValidatorContext, "Adding/updating the product would cause the associated part '" + p.getName() + "' to fall below the minimum inventory.");
                     return false;
                 }
             }
-
-            return true;
-        } else {
-            return true;
         }
+
+        // Check part validation separately
+        for (Part part : product.getParts()) {
+            if (!isValid(part, (BindingResult) constraintValidatorContext)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    // Extend validation to handle both InhousePart and OutsourcedPart
     public boolean isValid(@Valid Part part, BindingResult bindingResult) {
-        // Implement common validation for both InhousePart and OutsourcedPart
         if (part.getInv() < part.getMinInv()) {
-            addValidationError(bindingResult, "Inventory cannot be below the minimum.");
+            addValidationError(bindingResult, "Inventory cannot be below the minimum for part '" + part.getName() + "'.");
             return false;
         }
 
         if (part.getInv() > part.getMaxInv()) {
-            addValidationError(bindingResult, "Inventory cannot be above the maximum.");
+            addValidationError(bindingResult, "Inventory cannot be above the maximum for part '" + part.getName() + "'.");
             return false;
         }
 
